@@ -1,8 +1,19 @@
-(ns qutils.util)
+(ns qutils.util
+  (:refer-clojure :exclude [rand-int]))
+
+(def alphabet
+  (map char (range (-> \a int)
+                   (inc (-> \z int)))))
 
 (defn abs
   [x]
   (max x (* -1 x)))
+
+(defn rand-int
+  ([hi] (rand-int 0 hi))
+  ([lo hi]
+   (let [spread (-> (- hi lo) abs)]
+     (+ lo (clojure.core/rand-int spread)))))
 
 (defn mostly=
   "Returns true if `x` and `y` differ by less than a billionth."
