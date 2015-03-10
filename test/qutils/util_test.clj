@@ -1,14 +1,15 @@
 (ns qutils.util-test
+  (:refer-clojure :exclude [rand-int])
   (:require [clojure.test :refer :all]
             [qutils.util :refer :all]))
 
 (deftest mostly=-test
-  (dotimes [_ 1e6]
+  (dotimes [_ 1e5]
     (let [x (- (rand) 0.5)]
       (is (mostly= x (+ x (- (rand 1e-9) (/ 1e-9 2))))))))
 
 (deftest abs-test
-  (dotimes [_ 1e6]
+  (dotimes [_ 1e5]
     (let [x (- (rand) 0.5)]
       (if (> x 0)
         (= x (abs x))
