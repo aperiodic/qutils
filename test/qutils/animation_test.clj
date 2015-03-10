@@ -26,7 +26,7 @@
 (deftest animation-test
   (let [id (curve/linear 0 1)]
     (is (thrown? IllegalArgumentException (animation id :0s :1d)))
-    (is (animation id 0   :1d))
+    (is (animation id 0 :1d))
     (is (animation id :1d 0))
     (doseq [id-anim [(animation id 0 1) (animation id :0s :1s)]
             i (range 0 1 0.01)]
