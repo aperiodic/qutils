@@ -1,5 +1,5 @@
 (ns qutils.util
-  (:refer-clojure :exclude [rand-int]))
+  (:refer-clojure :exclude [rand rand-int]))
 
 (def alphabet
   (map char (range (-> \a int)
@@ -8,6 +8,13 @@
 (defn abs
   [x]
   (max x (* -1 x)))
+
+(defn rand
+  ([] (rand 0 1))
+  ([lo] (rand 0 lo))
+  ([lo hi]
+   (let [spread (-> (- hi lo) abs)]
+     (+ lo (clojure.core/rand spread)))))
 
 (defn rand-int
   ([hi] (rand-int 0 hi))

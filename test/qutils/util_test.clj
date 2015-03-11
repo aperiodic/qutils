@@ -1,5 +1,5 @@
 (ns qutils.util-test
-  (:refer-clojure :exclude [rand-int])
+  (:refer-clojure :exclude [rand rand-int])
   (:require [clojure.test :refer :all]
             [qutils.util :refer :all]))
 
