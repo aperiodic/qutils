@@ -1,5 +1,7 @@
 (ns qutils.curve
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [qutils.util :refer [binomial]]
+            [qutils.vector :as vec]))
 
 (defprotocol Curve
   "The protocol for curves used in animations. In order to implement a new kind of animation curve,
@@ -61,3 +63,16 @@
       (1 1.0) hi
       (let [diff (- hi lo)]
         (+ lo (* t diff))))))
+
+(defcurve Bezier
+  [points]
+  (position-at
+    [_ t]
+    (let [n (dec (count points))]
+      (apply vec/sum
+             (for [i (range (inc n))
+                   :let [point (nth points i)]]
+               (vec/scale (* (binomial n i)
+                             (Math/pow t i)
+                             (Math/pow (- 1 t) (- n i)))
+                          point))))))

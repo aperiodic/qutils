@@ -22,6 +22,11 @@
    (let [spread (-> (- hi lo) abs)]
      (+ lo (clojure.core/rand-int spread)))))
 
+(defn binomial
+  [n k]
+  (int (apply * (for [i (range 1 (inc k))]
+                  (/ (- n (- k i)) i)))))
+
 (defn mostly=
   "Returns true if `x` and `y` differ by less than a billionth."
   [x y]
