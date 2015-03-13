@@ -36,3 +36,40 @@
   {:pre [(same-dimensions? low-corner high-corner)]}
   (vec (for [[floor ceiling] (map vector low-corner high-corner)]
          (rand floor ceiling))))
+
+(defn vec-comp
+  "Given a binary predicate `op` and two vectors `p` and `q`, return true if
+  `op` is truthy for every corresponding pair of components between `p` and `q`,
+  false otherwise."
+  [op p q]
+  {:pre [(same-dimensions? p q)]}
+  (loop [pq (map vector p q)]
+    (if-let [[p_i q_i] (first pq)]
+      (if (op p_i q_i)
+        (recur (rest pq))
+        false)
+      true)))
+
+(defn vec<
+  "Given two vectors `p` and `q`, return true if every component of `p` is less
+  than the corresponding component of `q`, false otherwise."
+  [p q]
+  (vec-comp < p q))
+
+(defn vec<=
+  "Given two vectors `p` and `q`, return true if every component of `p` is less
+  than or equal to the corresponding component of `q`, false otherwise."
+  [p q]
+  (vec-comp <= p q))
+
+(defn vec>
+  "Given two vectors `p` and `q`, return true if every component of `p` is
+  greater than the corresponding component of `q`, false otherwise."
+  [p q]
+  (vec-comp > p q))
+
+(defn vec>=
+  "Given two vectors `p` and `q`, return true if every component of `p` is
+  greater than or equal to the corresponding component of `q`, false otherwise."
+  [p q]
+  (vec-comp >= p q))

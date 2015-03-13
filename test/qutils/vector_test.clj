@@ -34,3 +34,10 @@
       (doseq [[i r_i] (map vector (range) rand-point)]
         (is (<= (nth lo i) r_i))
         (is (>= (nth hi i) r_i))))))
+
+(deftest vec-comp-test
+  ;; since all the vec* comparisons just use vec-comp we'll just test vec<
+  (is (vec< [0 0 0] [1 1 1]))
+  (is (not (vec< [0 0 0] [1 0 1])))
+  (is (not (vec< [0 0 1] [1 1 1])))
+  (is (vec< [] [])))
