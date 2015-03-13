@@ -1,4 +1,4 @@
-(defproject qutils "0.1.0-SNAPSHOT"
+(defproject aperiodic/qutils "0.1.0-SNAPSHOT"
   :description "Fundamental helpers for quil."
   :url "https://github.com/aperiodic/qutils"
   :license {:name "Eclipse Public License"
