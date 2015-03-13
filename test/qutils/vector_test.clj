@@ -23,3 +23,14 @@
 (deftest difference-test
   (is (= [1 1 1] (difference [2 3 4] [1 2 3])))
   (is (= [1 0 -1] (difference [2 3 4] [1 2 3] [0 1 2]))))
+
+(deftest rand-point-test
+  (dotimes [_ 1e4]
+    (let [n (rand-int 1 10)
+          lo (vec (repeatedly n #(rand)))
+          hi (vec (->> (repeatedly n #(rand))
+                    (map inc)))
+          rand-point (rand-point lo hi)]
+      (doseq [[i r_i] (map vector (range) rand-point)]
+        (is (<= (nth lo i) r_i))
+        (is (>= (nth hi i) r_i))))))
