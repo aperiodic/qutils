@@ -2,13 +2,17 @@
   (:refer-clojure :exclude [rand])
   (:require [qutils.util :refer [rand]]))
 
+(defn same-dimensions?
+  [p q]
+  (= (count p) (count q)))
+
 (defn scale
   [scalar point]
   (mapv (partial * scalar) point))
 
 (defn sum
   ([p q]
-   {:pre [(= (count p) (count q))]}
+   {:pre [(same-dimensions? p q)]}
    (mapv + p q))
   ([p q & rs]
    (loop [summed (sum p q), remaining rs]
@@ -29,6 +33,6 @@
   "Given two points, return a random point within the n-box that those two points define. The points
   must have the same number of dimensions."
   [low-corner high-corner]
-  {:pre [(= (count low-corner) (count high-corner))]}
+  {:pre [(same-dimensions? low-corner high-corner)]}
   (vec (for [[floor ceiling] (map vector low-corner high-corner)]
          (rand floor ceiling))))
