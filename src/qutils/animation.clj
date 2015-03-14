@@ -19,12 +19,13 @@
     (let [[_ q u] (digits-then-letters? x)]
       [(Integer/parseInt q) (keyword u)]))))
 
-(deftype Animation
+(defrecord Animation
   [curve start stop]
   clojure.lang.IFn
   (invoke [_ time]
     (let [t (interpolate time start stop)]
-      (curve t))))
+      (curve t)))
+  (applyTo [anim args] (clojure.lang.AFn/applyToHelper anim args)))
 
 (defn animation
   "Create an animation using the supplied curve, that starts at the `start` time and has the

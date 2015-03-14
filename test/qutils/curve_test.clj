@@ -10,8 +10,8 @@
 (deftest bezier-test
   (let [linear-bez (bezier [[0 0] [1 1]])]
     (doseq [i (range 0.0 1.0 0.001)]
-      (is (= [i i] (linear-bez i)))))
+      (is (= [i i] (linear-bez i) (apply linear-bez [i])))))
 
   (let [quad-bez (bezier [[0 0] [1 0] [1 1]])]
     (doseq [i (range 0.0 1.0 0.001)]
-      (is (>= i (nth (quad-bez i) 1) )))))
+      (is (>= i (nth (quad-bez i) 1))))))

@@ -40,7 +40,7 @@
         title-curve (-> (str/capitalize (name curve)) symbol)
         lowercase-curve (-> (str/lower-case (name curve)) symbol)]
     `(do
-       (deftype ~title-curve
+       (defrecord ~title-curve
          ~fields
          Curve
          (~'position-at ~args

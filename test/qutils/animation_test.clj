@@ -30,4 +30,4 @@
     (is (animation id :1d 0))
     (doseq [id-anim [(animation id 0 1) (animation id :0s :1s)]
             i (range 0 1 0.01)]
-      (is (= i (id-anim i))))))
+      (is (= i (id-anim i) (apply id-anim [i]))))))
