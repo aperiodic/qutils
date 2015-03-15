@@ -18,3 +18,8 @@
 (deftest interpolate-test
   (doseq [i (range 0 1 0.01)]
     (is (mostly= i (interpolate (* 10 i) 0 10)))))
+
+(deftest restore-state-test
+  (let [!a (atom nil)]
+    (do (restore-state !a ":value")
+      (is (= :value @!a)))))

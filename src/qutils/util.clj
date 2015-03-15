@@ -41,3 +41,9 @@
     (<= x lo) 0
     (>= x hi) 1
     :else (/ (- x lo 0.0) hi))) ; the 0.0 is to typecast to a double
+
+(defn restore-state
+  "Reset the `!state` atom with the deserialized value from the EDN `state-str`."
+  [!state state-str]
+  (let [state (read-string state-str)]
+    (reset! !state state)))
