@@ -1,6 +1,7 @@
 (ns qutils.vector
   (:refer-clojure :exclude [rand])
-  (:require [qutils.util :refer [rand]]))
+  (:require [qutils.math :refer [sq]]
+            [qutils.util :refer [rand]]))
 
 (defn same-dimensions?
   [p q]
@@ -73,3 +74,12 @@
   greater than or equal to the corresponding component of `q`, false otherwise."
   [p q]
   (vec-comp >= p q))
+
+(defn dist-sq
+  [p q]
+  (let [diffs (map - p q)]
+    (apply + (map sq diffs))))
+
+(defn dist
+  [p q]
+  (Math/sqrt (dist-sq p q)))
