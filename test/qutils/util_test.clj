@@ -16,8 +16,12 @@
         (= x (abs (* -1 x)))))))
 
 (deftest interpolate-test
-  (doseq [i (range 0 1 0.01)]
-    (is (mostly= i (interpolate (* 10 i) 0 10)))))
+  (doseq [i (range 0 10 0.01)]
+    (is (mostly= (/ i 10) (interpolate i 0 10))))
+
+  (doseq [i (range 15 25 0.01)]
+    (is (mostly= (-> i (- 15) (/ 10))
+                 (interpolate i 15 25)))))
 
 (deftest restore-state-test
   (let [!a (atom nil)]
